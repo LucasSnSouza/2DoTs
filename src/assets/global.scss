@@ -1,0 +1,110 @@
+.pointer{
+    cursor: pointer;
+}
+
+.relative{
+    position: relative;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.hidden{
+    overflow: hidden;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.slim{
+    font-weight: 400;
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    flex-direction: column;
+}
+
+.flex-reverse-column{
+    flex-direction: column-reverse;
+}
+
+.flex-row{
+    flex-direction: row;
+}
+
+.flex-reverse-row{
+    flex-direction: row-reverse;
+}
+
+.justify-between{
+    justify-content: space-between;
+}
+
+.x-start{
+    justify-content: flex-start;
+}
+
+.x-center{
+    justify-content: center;
+}
+
+.x-end{
+    justify-content: flex-end;
+}
+
+.y-start{
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+.y-center{
+    align-items: center;
+    align-content: center;
+}
+
+.y-end{
+    align-items: flex-end;
+    align-content: flex-end;
+}
+
+.h-full{
+    height: 100%;
+}
+
+.h-half{
+    height: 50%;
+}
+
+.w-full{
+    width: 100%;
+}
+
+.w-half{
+    width: 50%;
+}
+
+.text-start{
+    text-align: start;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.text-end{
+    text-align: end;
+}
+
+.scroll-y{
+    overflow-y: scroll;
+}
+
+.scroll-x{
+    overflow-x: scroll;
+}

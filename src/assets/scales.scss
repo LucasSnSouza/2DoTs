@@ -1,0 +1,132 @@
+$scale-sm: 4px;
+$scale-md: 8px;
+$scale-lg: 12px;
+$scale-xlg: 16px;
+
+$font-xsm: 10pt;
+$font-sm: 12pt;
+$font-md: 14pt;
+$font-lg: 16pt;
+$font-xlg: 20pt;
+
+:root{
+    --scale-brand-sm: #{$scale-sm};
+    --scale-brand-md: #{$scale-md};
+    --scale-brand-lg: #{$scale-lg};
+
+    --text-brand-sm: #{$font-sm};
+    --text-brand-md: #{$font-md};
+    --text-brand-lg: #{$font-lg};
+}
+
+.m-sm{
+    margin: $scale-sm;
+}
+
+.m-md{
+    margin: $scale-md;
+}
+
+.m-lg{
+    margin: $scale-lg;
+}
+
+.p-sm{
+    padding: $scale-sm;
+}
+
+.p-md{
+    padding: $scale-md;
+}
+
+.p-lg{
+    padding: $scale-lg;
+}
+
+.p-xlg{
+    padding: $scale-xlg;
+}
+
+.rounded{
+    border-radius: 999px;
+}
+
+.rounded-sm{
+    border-radius: $scale-sm;
+}
+
+.rounded-md{
+    border-radius: $scale-md;
+}
+
+.rounded-lg{
+    border-radius: $scale-lg;
+}
+
+.o-full{
+    opacity: 1.0;
+}
+
+.o-3-4{
+    opacity: 0.75;
+}
+
+.o-half{
+    opacity: 0.5;
+}
+
+.o-1-4{
+    opacity: 0.25;
+}
+
+.gap-sm{
+    gap: $scale-sm;
+}
+
+.gap-md{
+    gap: $scale-md;
+}
+
+.gap-lg{
+    gap: $scale-lg;
+}
+
+.font-xsm{
+    font-size: $font-xsm;
+}
+
+.font-sm{
+    font-size: $font-sm;
+}
+
+.font-md{
+    font-size: $font-md;
+}
+
+.font-lg{
+    font-size: $font-lg;
+}
+
+.font-xlg{
+    font-size: $font-xlg;
+}
+
+.letter-sm{
+    letter-spacing: 2px;
+}
+
+.letter-md{
+    letter-spacing: 4px;
+}
+
+.letter-lg{
+    letter-spacing: 8px;
+}
+
+.shadow-sm{
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.05);
+}
+
+.aspect-ratio{
+    aspect-ratio: 1/1;
+}
