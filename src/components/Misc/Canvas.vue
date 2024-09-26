@@ -14,7 +14,7 @@
 
 <script>
 
-import { getScreenDimensions } from '@/utils/page';
+import { getScreenDimensions, getParentElement } from '@/utils/page';
 import { Core, Scene, Entity, Keyboard} from '@/utils/engine';
 
 export default{
@@ -22,13 +22,15 @@ export default{
         return {
             drawboard_renderer: null,
             drawboard_engine: null,
-            screen_scale: getScreenDimensions()
+            screen_scale: null
         }
     },
     mounted(){
         this.drawboard_renderer = this.$refs.drawboardRenderer | null;
 
         if(this.drawboard_renderer !== null){
+            
+            this.screen_scale = getParentElement(this.$refs.drawboardRenderer);
             this.$refs.drawboardRenderer.width = this.screen_scale[0];
             this.$refs.drawboardRenderer.height = this.screen_scale[1];
 

@@ -1,10 +1,6 @@
 <template>
 
-    <div class="view-game-runtime-wrapper w-full h-full">
-        
-        <MiscCanvas></MiscCanvas>
-
-    </div>
+TESTE
 
 </template>
 
@@ -14,7 +10,8 @@ import * as Misc from '@/components/Misc';
 
 export default{
     data(){
-        return {
+        return{
+
         }
     },
     components: {
@@ -23,7 +20,3 @@ export default{
 }
 
 </script>
-
-<style>
-
-</style>
