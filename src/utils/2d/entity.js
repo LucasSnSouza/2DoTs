@@ -4,9 +4,11 @@ export class Entity{
         name = null,
         transform = { position: [0,0], scale: [0,0] },
     ){
-        this._scene = null;
         this._engine = null;
         this._context = null;
+        this._scene = null;
+        this._layer = null;
+        
         this._sprite = null;
         this._name = name;
         this._transform = transform;

@@ -3,6 +3,8 @@ export class Scene{
     constructor(name){
         this._engine = null;
         this._context = null;
+        this._scene = null;
+        
         this._name = name;
         this._entities = [];
     }
@@ -14,7 +16,8 @@ export class Scene{
     addEntity(entity){
         entity._engine = this._engine;
         entity._context = this._context;
-        entity._scene = this;
+        entity._scene = this._scene;
+        entity._layer = this;
         return this._entities.push(entity);
     }
 

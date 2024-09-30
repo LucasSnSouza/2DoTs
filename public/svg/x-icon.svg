@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="2.9554427mm"
+   height="2.9554422mm"
+   viewBox="0 0 2.9554427 2.9554422"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="cube-icon.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-11.898546,-1.1236301)">
+    <path
+       style="fill:none;fill-opacity:0.7;stroke:#ececec;stroke-width:0.259;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="m 12.028045,1.2531302 2.696443,2.6964422"
+       id="path3" />
+    <path
+       style="fill:none;fill-opacity:0.7;stroke:#ececec;stroke-width:0.259;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;paint-order:markers stroke fill"
+       d="M 14.724488,1.2531302 12.028045,3.9495724"
+       id="path4" />
+  </g>
+</svg>

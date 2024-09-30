@@ -2,7 +2,10 @@
 
     <div class="view-game-runtime-wrapper w-full h-full">
         
-        <MiscCanvas></MiscCanvas>
+        <MiscCanvas
+            engine="2d"
+        >
+        </MiscCanvas>
 
     </div>
 
