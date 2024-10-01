@@ -2,18 +2,24 @@ export class Entity{
     
     constructor(
         name = null,
-        transform = { position: [0,0], scale: [0,0] },
+        transform = { 
+            position: [0,0], 
+            size: [0,0] 
+        },
     ){
         this._engine = null;
         this._context = null;
         this._scene = null;
         this._layer = null;
         
-        this._sprite = null;
         this._name = name;
+        this._uid = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        this._id = null;
+
+        this._sprite = null;
         this._transform = transform;
-        this._code = []
-        this._last_draw_time_enlapse = 0;
+
+        this._code = [];
     }
 
     name(){
@@ -30,9 +36,11 @@ export class Entity{
 
     update(){
 
-        this._code.forEach(behaviors => {
-            behaviors[Object.keys(behaviors)[0]]();
-        })
+        if(this._code.length > 0){
+            this._code.forEach(behaviors => {
+                behaviors[Object.keys(behaviors)[0]]();
+            })
+        }
 
     }
 
@@ -44,8 +52,8 @@ export class Entity{
             this._context.fillRect(
                 this.getTransform().position[0],
                 this.getTransform().position[1],
-                this.getTransform().scale[0],
-                this.getTransform().scale[1]
+                this.getTransform().size[0],
+                this.getTransform().size[1]
             );
         }
 

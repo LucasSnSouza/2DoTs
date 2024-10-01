@@ -3,7 +3,9 @@
         class="button-basic" 
         :class="this.class, this.type"
     >
-        <slot></slot>
+        <div>
+            <slot></slot>
+        </div>
     </button>
 </template>
 
@@ -29,6 +31,11 @@ export default{
 .button-basic{
     outline: none;
     border: none;
+
+    &.ghost{
+        background: none;
+        border: 1px solid currentColor;
+    }
 }
 
 </style>

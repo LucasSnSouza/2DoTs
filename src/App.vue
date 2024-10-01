@@ -4,22 +4,22 @@
 
     <div class="app-superior-toolbar flex x-end gap-xlg bg-color-brand-one p-md">
       <MiscIcon
-        class="pointer"
-        icon="minus-icon"
-        :size="[12,12]"
+      class="pointer"
+      icon="minus-icon"
+      :size="[12,12]"
       />
       <MiscIcon
-        class="pointer"
-        icon="cube-icon"
-        :size="[12,12]"
-        @click="fetchFullscreen()"
+      class="pointer"
+      icon="cube-icon"
+      :size="[12,12]"
+      @click="fetchFullscreen()"
       />
       <MiscIcon
         class="pointer"
         icon="x-icon"
         :size="[12,12]"
       />
-    </div>
+      </div>
 
     <div class="app-screen-show h-full w-full">
       <RouterView />

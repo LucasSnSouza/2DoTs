@@ -5,7 +5,11 @@ export class Scene{
         this._context = null;
 
         this._name = name;
+        this._uid = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+        this._id = null;
         this._layers = [];
+
+        this._code = [];
     }
 
     name(){
@@ -24,6 +28,12 @@ export class Scene{
     }
 
     update(){
+
+        if(this._code.length > 0){
+            this._code.forEach(behaviors => {
+                behaviors[Object.keys(behaviors)[0]]();
+            })
+        }
 
         this._layers.forEach(layer => {
             layer.update();

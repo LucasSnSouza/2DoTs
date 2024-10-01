@@ -6,6 +6,8 @@ export class Core{
         this._context = drawboard.getContext("2d");
         this.callback = callback;
 
+        this._uid = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
+
         this._scenes = [];
         this._behaviors = [];
         this._last_enlapse_time = 0;
@@ -50,8 +52,8 @@ export class Core{
                         frames: this._frames,
                         frame_rate: this._frame_rate,
                         delta_time: this._delta_time,
-                        scenes_length: this._scenes.length,
-                        behaviors_length: this._behaviors.length,
+                        scenes_amount: this._scenes.length,
+                        behaviors_amount: this._behaviors.length,
                     }
                 );
             }
@@ -125,7 +127,7 @@ export class Core{
         });
 
         this._context.fillStyle = "white";
-        this._context.fillText(`Frames: ${this._frame_rate}`, 10, 20);
+        this._context.fillText(`Frames: ${this._frame_rate}, scenes: ${this._scenes.length}`, 10, 60);
 
     }
 

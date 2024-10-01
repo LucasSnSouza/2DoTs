@@ -1,22 +1,120 @@
 <template>
 
-    <div>Tteste</div>
+    <div class="view-game-editor-wrapper w-full h-full flex bg-color-brand-one relative">
+
+        <div class="game-editor-slash-menu h-full bg-color-brand-one p-sm gap-sm flex flex-column">
+
+            <div class="game-editor-engine-icon flex x-center y-center aspect-ratio bg-color-brand-three">
+                <MiscIcon
+                    icon="2d-engine-icon"
+                    :size="[24,24]"
+                />
+            </div>
+
+            <ButtonBasic
+                v-for="(item, index) of form_views"
+                class="bg-color-brand-two flex x-center y-center w-full aspect-ratio rounded-sm pointer relative"
+                :key="index"
+                @click="setMenuHighlight(index)"
+            >
+                <span v-if="item?.opened" class="indicator-bar-higthlight"></span>
+                <MiscIcon
+                    :icon="item?.icon"
+                    :size="[18,18]"
+                />
+            </ButtonBasic>
+
+        </div>
+
+        <ViewEntity
+            v-if="form_views[0].opened"
+        />
+
+        <ViewLayers
+            v-if="form_views[1].opened"
+        />
+
+        <ViewScenes
+            v-if="form_views[2].opened"
+        />
+
+        <div class="game-editor-framed-engine w-full">
+            <MiscCanvas
+                engine="2d"
+            >
+            </MiscCanvas>
+        </div>
+
+    </div>
 
 </template>
 
 <script>
 
 import * as Misc from '@/components/Misc';
+import * as Button from '@/components/Button';
+import * as View from '@/components/View';
 
 export default{
     data(){
         return{
-
+            form_views:[
+                {
+                    icon: "entity-icon",
+                    opened: false,
+                },
+                {
+                    icon: "layers-icon",
+                    opened: false,
+                },
+                {
+                    icon: "scene-icon",
+                    opened: false,
+                }
+            ]
         }
     },
     components: {
-        ...Misc
+        ...Misc,
+        ...Button,
+        ...View
+    },
+    methods: {
+        setMenuHighlight(clicked){
+            this.form_views = this.form_views.map((item, index) => ({
+                ...item,
+                opened: clicked == index ? !item.opened : false,
+            }))
+        },
     }
 }
 
 </script>
+
+<style lang="scss" scoped>
+
+.view-game-editor-wrapper{
+
+    .game-editor-slash-menu{
+        padding-top: 0px;
+        min-width: 50px;
+
+        .game-editor-engine-icon{
+            margin-left: -4px;
+            width: calc(100% + 8px);
+        }
+
+    }
+
+}
+
+.indicator-bar-higthlight{
+    width: 3px;
+    height: 60%;
+    position: absolute;
+    border-radius: 999px;
+    left: 0;
+    background: var(--color-brand-three);
+}
+
+</style>
