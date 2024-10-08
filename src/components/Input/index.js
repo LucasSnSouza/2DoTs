@@ -9,5 +9,5 @@ export {
     InputNote,
     InputCheckbox,
     InputPicture,
-    InputSelect
+    InputSelect,
 }

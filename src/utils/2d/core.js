@@ -23,7 +23,7 @@ export class Core{
 
     }
     
-    run(debug = false, frameRate = 60){
+    run(debug = false, frameRate = 400){
 
         this._profile = debug;
     
@@ -104,17 +104,21 @@ export class Core{
         scene._engine = this;
         scene._context = this._context;
         this._scenes.push(scene);
+        return scene;
     }
 
     addBehavior(behavior){
         this._behaviors.push(behavior);
+        return behavior;
     }
 
     update(){
 
-        this._scenes.forEach(scene => {
-            scene.update();
-        });
+        if(this._scenes.length > 0){
+            this._scenes.forEach(scene => {
+                scene.update();
+            });
+        }
         
     }
 
@@ -122,12 +126,15 @@ export class Core{
 
         this._context.clearRect(0,0, this.drawboard.width,this.drawboard.height);
 
-        this._scenes.forEach(scene => {
-            scene.draw();
-        });
+        if(this._scenes.length > 0){
+            this._scenes.forEach(scene => {
+                scene.draw();
+            });
+        }
 
         this._context.fillStyle = "white";
         this._context.fillText(`Frames: ${this._frame_rate}, scenes: ${this._scenes.length}`, 10, 60);
+        this._context.fillText(`Layers: ${this._scenes.length > 0 ? this._scenes[0].getLayersList().length : 0}, time: ${this._delta_time}`, 10, 80);
 
     }
 

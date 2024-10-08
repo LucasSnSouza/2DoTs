@@ -47,8 +47,6 @@ export default{
                 this.core = new Core(this.$refs.drawboardRenderer, (form) => {
                     this.$emit('onFrameCreated', form);
                 });
-                this.core.addScene(new Scene("Cena"));
-                this.core.addBehavior(new Keyboard());
             }
             
             this.core.run(true);

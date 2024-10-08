@@ -1,6 +1,7 @@
-export class Scene{
+export class Layer{
 
     constructor(name){
+        
         this._engine = null;
         this._context = null;
         this._scene = null;
@@ -19,6 +20,7 @@ export class Scene{
 
     addBehavior(behavior){
         this._code.push({ [behavior.name]: behavior.bind(this) });
+        return behavior;
     }
 
     addEntity(entity){
@@ -26,7 +28,8 @@ export class Scene{
         entity._context = this._context;
         entity._scene = this._scene;
         entity._layer = this;
-        return this._entities.push(entity);
+        this._entities.push(entity);
+        return entity;
     }
 
     getEntitiesList(entity = null){

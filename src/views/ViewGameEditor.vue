@@ -12,13 +12,15 @@
             </div>
 
             <ButtonBasic
-                v-for="(item, index) of form_views"
+                v-for="(item, index) of dynamicFormViews"
                 class="bg-color-brand-two flex x-center y-center w-full aspect-ratio rounded-sm pointer relative"
+                :disabled="item?.disabled"
                 :key="index"
                 @click="setMenuHighlight(index)"
             >
                 <span v-if="item?.opened" class="indicator-bar-higthlight"></span>
                 <MiscIcon
+                    :class="{'o-1-4': item?.disabled}"
                     :icon="item?.icon"
                     :size="[18,18]"
                 />
@@ -51,6 +53,8 @@
 
 <script>
 
+import { useCore } from '@/stores/core';
+
 import * as Misc from '@/components/Misc';
 import * as Button from '@/components/Button';
 import * as View from '@/components/View';
@@ -61,14 +65,17 @@ export default{
             form_views:[
                 {
                     icon: "entity-icon",
+                    disabled: useCore().getScene == null,
                     opened: false,
                 },
                 {
                     icon: "layers-icon",
+                    disabled: useCore().getScene == null,
                     opened: false,
                 },
                 {
                     icon: "scene-icon",
+                    disabled: true,
                     opened: false,
                 }
             ]
@@ -79,6 +86,30 @@ export default{
         ...Button,
         ...View
     },
+    computed: {
+        dynamicFormViews(){
+            return this.form_views.map((item, index) => {
+                if(index == 0){
+                    return {
+                        ...item,
+                        disabled: useCore().getLayer == null
+                    }
+                }
+                else if(index == 1){
+                    return {
+                        ...item,
+                        disabled: useCore().getScene == null
+                    }
+                }
+                else if(index == 2){
+                    return {
+                        ...item,
+                        disabled: false
+                    }
+                }
+            })
+        }
+    },
     methods: {
         setMenuHighlight(clicked){
             this.form_views = this.form_views.map((item, index) => ({
@@ -86,6 +117,8 @@ export default{
                 opened: clicked == index ? !item.opened : false,
             }))
         },
+    },
+    created(){
     }
 }
 

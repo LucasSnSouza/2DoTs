@@ -71,10 +71,12 @@ export default{
     &.one{
         
         input{
+            background: var(--color-brand-two);
             border: 1px solid var(--color-brand-two);
-            border-radius: var(--scale-brand-md);
+            border-radius: var(--scale-brand-sm);
             outline: none;
-            padding: var(--scale-brand-lg);
+            padding: var(--scale-brand-md);
+            color: var(--color-brand-four);
         }
 
         .input-text-counter{

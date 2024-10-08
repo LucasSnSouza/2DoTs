@@ -20,7 +20,8 @@ export class Scene{
         layer._engine = this._engine;
         layer._context = this._context;
         layer._scene = this;
-        return this._layers.push(layer);
+        this._layers.push(layer);
+        return layer;
     }
 
     getLayersList(layer = null){
