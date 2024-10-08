@@ -19,6 +19,10 @@ export const useCore = defineStore('core', {
     },
     fetchEntity(data){
       this.entity = data;
+    },
+    ereaseObjects(){
+      this.layer = null;
+      this.entity = null;
     }
   },
   getters: {

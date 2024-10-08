@@ -133,7 +133,7 @@ export class Core{
         }
 
         this._context.fillStyle = "white";
-        this._context.fillText(`Frames: ${this._frame_rate}, scenes: ${this._scenes.length}`, 10, 60);
+        this._context.fillText(`Frames: ${this._frame_rate}, scenes: ${this._scenes.length}, objects: ${this._scenes.length > 0 ? this._scenes[0].getLayersList().length > 0 ? this._scenes[0].getLayersList()[0].getEntitiesList().length : 0 : 0}`, 10, 60);
         this._context.fillText(`Layers: ${this._scenes.length > 0 ? this._scenes[0].getLayersList().length : 0}, time: ${this._delta_time}`, 10, 80);
 
     }

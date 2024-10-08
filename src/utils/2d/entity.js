@@ -3,8 +3,8 @@ export class Entity{
     constructor(
         name = null,
         transform = { 
-            position: [0,0], 
-            size: [0,0] 
+            position: [32,32], 
+            size: [20,20]
         },
     ){
         this._engine = null;
@@ -24,6 +24,10 @@ export class Entity{
 
     name(){
         return this._name;
+    }
+
+    size(){
+        return this._transform.size;
     }
 
     addBehavior(behavior){
@@ -52,8 +56,8 @@ export class Entity{
             this._context.fillRect(
                 this.getTransform().position[0],
                 this.getTransform().position[1],
-                this.getTransform().size[0],
-                this.getTransform().size[1]
+                Number(this.getTransform().size[0]),
+                Number(this.getTransform().size[1])
             );
         }
 

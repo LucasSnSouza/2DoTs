@@ -34,7 +34,11 @@
                 <p class="color-brand-four">Nenhuma cena selecionada</p>
             </ButtonBasic>
             <div v-else>
-                {{getActiveScene().name()}}
+                <InputEncapsuled
+                    title="Name"
+                    v-model="form_scene['sceneName']"
+                    :value="form_scene['sceneName']"
+                />
             </div>
 
             <p class="font-xsm color-brand-five">Cenas</p>
@@ -85,6 +89,9 @@ export default{
     data(){
         return{
             core: null,
+            form_scene: {
+                
+            },
             createScenename: null,
         }
     },
@@ -94,6 +101,15 @@ export default{
         ...Input
     },
     props:{
+    },
+    computed: {
+    },
+    watch: {
+        "form_scene.sceneName": {
+            handler(value){
+                useCore().getScene._name = value;
+            }
+        }
     },
     methods: {
         createScene(name="undefined"){
@@ -106,11 +122,20 @@ export default{
             return useCore().getScene;
         },
         setSceneStore(scene){
+            useCore().ereaseObjects();
             useCore().fetchScene(scene);
+            this.form_scene = {
+                sceneName: this.getActiveScene().name(),
+            };
         }
     },
     created(){
         this.core = useCore().getCore;
+    },
+    mounted(){
+        this.form_scene = {
+            sceneName: this.getActiveScene()?.name(),
+        };
     }
 }
 

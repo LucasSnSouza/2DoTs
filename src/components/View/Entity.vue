@@ -24,6 +24,16 @@
                     <p class="font-xsm">Criar</p>               
                 </ButtonBasic>
             </div>
+            <InputEncapsuled
+                title="Layer Ativa"
+                v-model="form_entity['layerName']"
+                :value="form_entity['layerName']"
+            />
+            <InputEncapsuled
+                title="Cena Ativa"
+                v-model="form_entity['sceneName']"
+                :value="form_entity['sceneName']"
+            />
 
             <p class="font-xsm color-brand-five">Propriedades</p>
             <ButtonBasic
@@ -32,9 +42,58 @@
             >
                 <p class="color-brand-four">Nenhuma entidade selecionada</p>
             </ButtonBasic>
-            <div v-else>
-                {{getActiveEntity().name()}}
+            <div 
+                v-else
+                class="flex flex-column gap-md"
+            >
+                <InputEncapsuled
+                    title="Nome"
+                    v-model="form_entity['entityName']"
+                    :value="form_entity['entityName']"
+                />
+                <InputVector
+                    title="Posição"
+                    v-model="form_entity['entityPosition']"
+                    :values="form_entity['entityPosition']"
+                    :vectors="2"
+                />
+                <InputVector
+                    title="Escala"
+                    v-model="form_entity['entitySize']"
+                    :values="form_entity['entitySize']"
+                    :vectors="2"
+                />
+                <!-- {{ form_entity }} -->
             </div>
+
+            <p class="font-xsm color-brand-five">Entidades</p>
+            <ButtonBasic
+                v-if="getEntitiesListCore().length == 0"
+                class="bg-color-brand-three color-brand-three font-xsm flex x-center y-center w-full p-lg rounded-sm ghost"
+            >
+                <p class="color-brand-four">Essa cena ainda não possui camadas</p>
+            </ButtonBasic>
+
+            <div 
+                v-else
+                class="flex flex-column gap-md"
+            >
+                <ButtonBasic
+                    v-for="(item, index) of getEntitiesListCore()"
+                    class="bg-color-brand-three color-brand-four font-xsm x-start y-center w-full p-md rounded-sm pointer"
+                    :key="index"
+                    @click="setEntityStore(item)"
+                >
+                    <div class="flex gap-lg">
+                        <MiscIcon
+                            icon="wrap-icon"
+                            :size="[16,16]"
+                        />
+                        <p>{{ item.name() }}</p>
+                    </div>
+                </ButtonBasic>
+            </div> 
+
         </div>
     </div>
 
@@ -52,7 +111,10 @@ import { Scene, Entity, Keyboard } from '@/utils/2d';
 export default{
     data(){
         return{
+            core: null,
             createEntityname: null,
+            form_entity: {
+            },
         }
     },
     components: {
@@ -62,13 +124,40 @@ export default{
     },
     props:{
     },
+    computed: {
+    },
+    watch: {
+        "form_entity.entitySize": {
+            handler(value){
+                useCore().getEntity._transform.size = value;
+            }
+        },
+        "form_entity.entityPosition": {
+            handler(value){
+                useCore().getEntity._transform.position = value;
+            }
+        },
+        "form_entity.entityName": {
+            handler(value){
+                useCore().getEntity._name = value;
+            }
+        }
+    },
     methods: {
         createEntity(name="undefined"){
             let entity = this.getActiveLayer().addEntity(new Entity(name));
-            this.setEntityStore(entity);
         },
         setEntityStore(entity){
             useCore().fetchEntity(entity);
+            this.form_entity = {
+                ...this.form_entity,
+                entitySize: this.getActiveEntity()._transform.size.map(num => num.toString()),
+                entityPosition: this.getActiveEntity()._transform.position.map(num => num.toString()),
+                entityName:  this.getActiveEntity()?.name(),
+            }
+        },
+        getEntitiesListCore(){
+            return this.getActiveLayer().getEntitiesList();
         },
         getActiveEntity(){
             return useCore().getEntity;
@@ -79,7 +168,16 @@ export default{
         getActiveScene(){
             return useCore().getScene;
         },
-    }
+    },
+    created(){
+        this.core = useCore().getCore;
+        this.form_entity = {
+            layerName: this.getActiveLayer()?.name(),
+            sceneName: this.getActiveScene()?.name(),
+            entityName: this.getActiveEntity()?.name(),
+            entitySize: this.getActiveEntity()?.size(),
+        }
+    },
 }
 
 </script>

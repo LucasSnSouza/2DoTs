@@ -25,6 +25,11 @@
                     <p class="font-xsm">Criar</p>               
                 </ButtonBasic>
             </div>
+            <InputEncapsuled
+                title="Cena Ativa"
+                v-model="form_layer['sceneName']"
+                :value="form_layer['sceneName']"
+            />
 
             <p class="font-xsm color-brand-five">Propriedades</p>
             <ButtonBasic
@@ -34,7 +39,11 @@
                 <p class="color-brand-four">Nenhuma camada selecionada</p>
             </ButtonBasic>
             <div v-else>
-                {{getActiveLayer().name()}}
+                <InputEncapsuled
+                    title="Nome"
+                    v-model="form_layer['layerName']"
+                    :value="form_layer['layerName']"
+                />
             </div>
 
             <p class="font-xsm color-brand-five">Camadas</p>
@@ -110,11 +119,19 @@ export default{
         },
         setLayerStore(layer){
             useCore().fetchLayer(layer);
+            this.form_layer = {
+                ...this.form_layer,
+                layerName: this.getActiveLayer().name(),
+            };
         }
     },
     created(){
         this.core = useCore().getCore;
-    }
+        this.form_layer = {
+            layerName: this.getActiveLayer()?.name(),
+            sceneName: this.getActiveScene()?.name(),
+        }
+    },
 }
 
 </script>
