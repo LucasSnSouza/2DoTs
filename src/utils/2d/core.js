@@ -9,11 +9,15 @@ export class Core{
         this._uid = Date.now().toString(36) + Math.random().toString(36).substr(2, 9);
 
         this._scenes = [];
+        this._cameras = [];
         this._behaviors = [];
+        
         this._last_enlapse_time = 0;
         this._delta_time = 0;
         this._frame_rate = 0;
         this._frames = 0;
+
+        this._code = [];
 
         window.addEventListener('resize', () => {
             let parent = this.drawboard.parentElement;
@@ -131,10 +135,6 @@ export class Core{
                 scene.draw();
             });
         }
-
-        this._context.fillStyle = "white";
-        this._context.fillText(`Frames: ${this._frame_rate}, scenes: ${this._scenes.length}, objects: ${this._scenes.length > 0 ? this._scenes[0].getLayersList().length > 0 ? this._scenes[0].getLayersList()[0].getEntitiesList().length : 0 : 0}`, 10, 60);
-        this._context.fillText(`Layers: ${this._scenes.length > 0 ? this._scenes[0].getLayersList().length : 0}, time: ${this._delta_time}`, 10, 80);
 
     }
 

@@ -16,6 +16,7 @@
                 <InputText
                     v-model="content"
                     :value="value"
+                    :disabled="disabled"
                     @input="$emit('update:modelValue', content)"
                 />
             </div>
@@ -39,6 +40,10 @@ export default{
         title: {
             type: String,
             default: null
+        },
+        disabled:{
+            type: Boolean,
+            default: false,
         },
         value: {
             type: String,

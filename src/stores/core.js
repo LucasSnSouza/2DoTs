@@ -20,9 +20,19 @@ export const useCore = defineStore('core', {
     fetchEntity(data){
       this.entity = data;
     },
-    ereaseObjects(){
-      this.layer = null;
-      this.entity = null;
+    wipeDatas(core=null, scene=null, layer=null, entity=null){
+      if(core){
+        this.core = null;
+      }
+      else if(scene){
+        this.scene = null;
+      }
+      else if(layer){
+        this.layer = null;
+      }
+      else if(entity){
+        this.entity = null;
+      }
     }
   },
   getters: {

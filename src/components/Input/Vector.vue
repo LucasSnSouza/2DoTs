@@ -17,7 +17,8 @@
                     v-for="(item, index) of range"
                     v-model="form_values[index]"
                     :value="values[index]"
-                    @input="$emit('update:modelValue', form_values)"
+                    :disabled="disabled"
+                    @input="$emit('update:modelValue', form_values )"
                     :key="index"
                 />
             </div>
@@ -38,6 +39,15 @@ export default{
         }
     },
     props: {
+        type: {
+            type: String,
+            default: 'TEXT',
+            exemple: ['TEXT', 'NUMBER']
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
         title: {
             type: String,
             default: null

@@ -122,7 +122,7 @@ export default{
             return useCore().getScene;
         },
         setSceneStore(scene){
-            useCore().ereaseObjects();
+            useCore().wipeDatas(null, true, true, true);
             useCore().fetchScene(scene);
             this.form_scene = {
                 sceneName: this.getActiveScene().name(),

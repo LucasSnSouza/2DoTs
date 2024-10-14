@@ -52,9 +52,11 @@ export class Layer{
 
     draw(){
 
-        this._entities.forEach(entity => {
-            entity.draw();
-        })
+        if(this._entities.length > 0){
+            this._entities.forEach(entity => {
+                entity.draw();
+            })
+        }
 
     }
 

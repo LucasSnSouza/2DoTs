@@ -36,17 +36,21 @@ export class Scene{
             })
         }
 
-        this._layers.forEach(layer => {
-            layer.update();
-        })
+        if(this._layers.length > 0){
+            this._layers.forEach(layer => {
+                layer.update();
+            })
+        }
 
     }
 
     draw(){
 
-        this._layers.forEach(layer => {
-            layer.draw();
-        })
+        if(this._layers.length > 0){
+            this._layers.forEach(layer => {
+                layer.draw();
+            })
+        }
 
     }
 

@@ -26,11 +26,13 @@
             </div>
             <InputEncapsuled
                 title="Layer Ativa"
+                disabled
                 v-model="form_entity['layerName']"
                 :value="form_entity['layerName']"
             />
             <InputEncapsuled
                 title="Cena Ativa"
+                disabled
                 v-model="form_entity['sceneName']"
                 :value="form_entity['sceneName']"
             />
@@ -63,37 +65,14 @@
                     :values="form_entity['entitySize']"
                     :vectors="2"
                 />
+                <InputEncapsuled
+                    title="Cor"
+                    v-model="form_entity['entityColor']"
+                    :value="form_entity['entityColor']"
+                />
                 <!-- {{ form_entity }} -->
             </div>
-
-            <p class="font-xsm color-brand-five">Entidades</p>
-            <ButtonBasic
-                v-if="getEntitiesListCore().length == 0"
-                class="bg-color-brand-three color-brand-three font-xsm flex x-center y-center w-full p-lg rounded-sm ghost"
-            >
-                <p class="color-brand-four">Essa cena ainda não possui camadas</p>
-            </ButtonBasic>
-
-            <div 
-                v-else
-                class="flex flex-column gap-md"
-            >
-                <ButtonBasic
-                    v-for="(item, index) of getEntitiesListCore()"
-                    class="bg-color-brand-three color-brand-four font-xsm x-start y-center w-full p-md rounded-sm pointer"
-                    :key="index"
-                    @click="setEntityStore(item)"
-                >
-                    <div class="flex gap-lg">
-                        <MiscIcon
-                            icon="wrap-icon"
-                            :size="[16,16]"
-                        />
-                        <p>{{ item.name() }}</p>
-                    </div>
-                </ButtonBasic>
-            </div> 
-
+            
         </div>
     </div>
 
@@ -129,23 +108,28 @@ export default{
     watch: {
         "form_entity.entitySize": {
             handler(value){
-                useCore().getEntity._transform.size = value;
+                this.getActiveEntity()._transform.size = value;
             }
         },
         "form_entity.entityPosition": {
             handler(value){
-                useCore().getEntity._transform.position = value;
+                this.getActiveEntity()._transform.position = value;
             }
         },
         "form_entity.entityName": {
             handler(value){
-                useCore().getEntity._name = value;
+                this.getActiveEntity()._name = value;
+            }
+        },
+        "form_entity.entityColor": {
+            handler(value){
+                this.getActiveEntity()._meta.color = value;
             }
         }
     },
     methods: {
         createEntity(name="undefined"){
-            let entity = this.getActiveLayer().addEntity(new Entity(name));
+            this.setEntityStore(this.getActiveLayer().addEntity(new Entity(name)));
         },
         setEntityStore(entity){
             useCore().fetchEntity(entity);
@@ -153,11 +137,10 @@ export default{
                 ...this.form_entity,
                 entitySize: this.getActiveEntity()._transform.size.map(num => num.toString()),
                 entityPosition: this.getActiveEntity()._transform.position.map(num => num.toString()),
-                entityName:  this.getActiveEntity()?.name(),
+                entityName: this.getActiveEntity()?.name(),
+                entityColor: this.getActiveEntity()?.color(),
             }
-        },
-        getEntitiesListCore(){
-            return this.getActiveLayer().getEntitiesList();
+            this.$emit('changePage', 1);
         },
         getActiveEntity(){
             return useCore().getEntity;
@@ -175,7 +158,9 @@ export default{
             layerName: this.getActiveLayer()?.name(),
             sceneName: this.getActiveScene()?.name(),
             entityName: this.getActiveEntity()?.name(),
+            entityPosition: this.getActiveEntity()?.position(),
             entitySize: this.getActiveEntity()?.size(),
+            entityColor: this.getActiveEntity()?.color(),
         }
     },
 }

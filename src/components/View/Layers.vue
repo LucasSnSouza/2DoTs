@@ -27,6 +27,7 @@
             </div>
             <InputEncapsuled
                 title="Cena Ativa"
+                disabled
                 v-model="form_layer['sceneName']"
                 :value="form_layer['sceneName']"
             />
@@ -47,7 +48,6 @@
             </div>
 
             <p class="font-xsm color-brand-five">Camadas</p>
-
             <ButtonBasic
                 v-if="getLayersListCore().length == 0"
                 class="bg-color-brand-three color-brand-three font-xsm flex x-center y-center w-full p-lg rounded-sm ghost"
@@ -73,7 +73,35 @@
                         <p>{{ item.name() }}</p>
                     </div>
                 </ButtonBasic>
-            </div>            
+            </div>    
+            
+            <p class="font-xsm color-brand-five">Entidades</p>
+            <ButtonBasic
+                v-if="getEntitiesListCore().length == 0"
+                class="bg-color-brand-three color-brand-three font-xsm flex x-center y-center w-full p-lg rounded-sm ghost"
+            >
+                <p class="color-brand-four">Essa camada ainda não possui entidades</p>
+            </ButtonBasic>
+
+            <div 
+                v-else
+                class="flex flex-column gap-md"
+            >
+                <ButtonBasic
+                    v-for="(item, index) of getEntitiesListCore()"
+                    class="bg-color-brand-three color-brand-four font-xsm x-start y-center w-full p-md rounded-sm pointer"
+                    :key="index"
+                    @click="setEntityStore(item)"
+                >
+                    <div class="flex gap-lg">
+                        <MiscIcon
+                            icon="wrap-icon"
+                            :size="[16,16]"
+                        />
+                        <p>{{ item.name() }}</p>
+                    </div>
+                </ButtonBasic>
+            </div> 
 
         </div>
     </div>
@@ -95,6 +123,7 @@ export default{
         return{
             core: null,
             createLayername: null,
+            form_layer: {}
         }
     },
     components: {
@@ -103,6 +132,13 @@ export default{
         ...Input
     },
     props:{
+    },
+    watch: {
+        "form_layer.layerName": {
+            handler(value){
+                this.getActiveLayer()._name = value;
+            }
+        }
     },
     methods: {
         createLayer(name="undefined"){
@@ -117,13 +153,25 @@ export default{
         getActiveScene(){
             return useCore().getScene;
         },
+        getEntitiesListCore(){
+            if(this.getActiveLayer() != null){
+                return this.getActiveLayer().getEntitiesList();
+            }else{
+                return [];
+            }
+        },
         setLayerStore(layer){
+            useCore().wipeDatas(null, null, null, true);
             useCore().fetchLayer(layer);
             this.form_layer = {
                 ...this.form_layer,
                 layerName: this.getActiveLayer().name(),
             };
-        }
+        },
+        setEntityStore(entity){
+            useCore().fetchEntity(entity);
+            this.$emit('changePage', 0);
+        },
     },
     created(){
         this.core = useCore().getCore;

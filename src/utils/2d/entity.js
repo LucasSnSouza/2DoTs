@@ -3,9 +3,12 @@ export class Entity{
     constructor(
         name = null,
         transform = { 
-            position: [32,32], 
-            size: [20,20]
+            position: ["0","0"], 
+            size: ["0","0"]
         },
+        meta = {
+            color: "FFFFFFFF"
+        }
     ){
         this._engine = null;
         this._context = null;
@@ -18,12 +21,21 @@ export class Entity{
 
         this._sprite = null;
         this._transform = transform;
+        this._meta = meta;
 
         this._code = [];
     }
 
     name(){
         return this._name;
+    }
+
+    color(){
+        return this._meta.color;
+    }
+
+    position(){
+        return this._transform.position;
     }
 
     size(){
@@ -53,9 +65,10 @@ export class Entity{
         if(this._sprite){
 
         }else{
+            this._context.fillStyle = `#${this._meta.color}`;
             this._context.fillRect(
-                this.getTransform().position[0],
-                this.getTransform().position[1],
+                Number(this.getTransform().position[0]),
+                Number(this.getTransform().position[1]),
                 Number(this.getTransform().size[0]),
                 Number(this.getTransform().size[1])
             );

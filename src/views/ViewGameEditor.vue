@@ -30,10 +30,12 @@
 
         <ViewEntity
             v-if="form_views[0].opened"
+            @changePage="(data) => {setMenuHighlight(data)}"
         />
 
         <ViewLayers
             v-if="form_views[1].opened"
+            @changePage="(data) => {setMenuHighlight(data)}"
         />
 
         <ViewScenes
